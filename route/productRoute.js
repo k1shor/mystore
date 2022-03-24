@@ -1,5 +1,5 @@
 const express=require('express')
-const { addProduct, productList, productDetails, updateProduct, deleteProduct } = require('../controller/productController')
+const { addProduct, productList, productDetails, updateProduct, deleteProduct, listRelated, filterProduct } = require('../controller/productController')
 const { requireSignIn } = require('../controller/userController')
 const router=express.Router()
 const upload=require('../middleware/file-upload')
@@ -10,6 +10,8 @@ router.get('/productlist',productList)
 router.get('/productdetails/:Id',productDetails)
 router.put('/updateproduct/:Id',requireSignIn,updateProduct)
 router.delete('/deleteproduct/:Id',requireSignIn,deleteProduct)
+router.get('/product/related/:Id',listRelated)
+router.post('/filterproduct', filterProduct)
 
 
 

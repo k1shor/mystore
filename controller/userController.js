@@ -28,12 +28,14 @@ exports.userRegister = async (req, res) => {
             if (!token) {
                 return res.status(400).json({ error: "token couldn't be saved" })
             }
+            const url = process.env.FRONTEND_URL+`\/email\/confirmation\/`+token.token
             sendEmail({
                 from: 'noreply@mystore.com',
                 to: user.email,
                 subject: 'Verification email',
                 text: ` Hello, \n Please click on the following link to verify your email.\n http:\/\/${req.headers.host}\/user\/confirmation\/${token.token}`,
-                html: `<h1>Verify your email </h1>`
+                html: `<h1>Verify your email </h1>
+                <button><a href='${url}'>Verify Email</a></button>`
             })
 
             if (!user) {
@@ -152,13 +154,15 @@ exports.forgetPassword = async (req, res) => {
     if (!token) {
         return res.status(400).json({ error: "Token could not be generated." })
     }
+    const url = process.env.FRONTEND_URL+`\/user\/resetpassword\/`+token.token
     sendEmail({
         from: 'noreply@mystore.com',
         to: user.email,
         subject: 'Password Reset link',
         text: ` \n Please click on the following link to reset your password.
         \n http:\/\/${req.headers.host}\/user\/resetpassword\/${token.token}`,
-        html: `<h1>Reset your password. </h1>`
+        html: `<h1>Reset your password. </h1>
+        <button className="btn btn-primary"><a href='${url}'>Reset Password</a></button>`
     })
     res.json({ message: "Password reset link has been sent to your email" })
 
