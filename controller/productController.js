@@ -123,14 +123,17 @@ exports.filterProduct = async(req,res)=>{
     }
 
     const product = await Product.find(findArgs)
-    // .populate('category')
-    // .sort([[sortBy,order]])
-    // .limit(limit)
-    // .skip(skip)
+    .populate('category')
+    .sort([[sortBy,order]])
+    .limit(limit)
+    .skip(skip)
     
     if(!product){
         return res.status(400).json({error:"something went wrong"})
     }
-    res.send(product)
+    res.json({
+        size:product.length,
+        product
+    })
 }
 
