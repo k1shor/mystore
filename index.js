@@ -6,6 +6,7 @@ const CategoryRoute=require('./route/categoryRoute')
 const ProductRoute=require('./route/productRoute')
 const UserRoute = require('./route/userRoute')
 const OrderRoute=require('./route/orderRoute')
+const PaymentRoute = require('./route/paymentRoute')
 
 const db=require('./database/connection')
 const bodyParser =require('body-parser')
@@ -32,6 +33,7 @@ app.use('/category',CategoryRoute)
 app.use('/products',ProductRoute)
 app.use('/user',UserRoute)
 app.use('/order',OrderRoute)
+app.use(PaymentRoute)
 
 const port=process.env.PORT || 5000
 
