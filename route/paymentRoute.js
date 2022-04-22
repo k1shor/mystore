@@ -5,7 +5,7 @@ const { requireSignIn } = require('../controller/userController')
 const router = express.Router()
 
 
-router.post('/process/payment', requireSignIn, processPayment)
+router.post('/payment/process', requireSignIn, processPayment)
 router.get('/stripeapi', sendStripeApi)
 
 
